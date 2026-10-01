@@ -1,0 +1,6 @@
+const toggle=document.querySelector('.toggle'),nav=document.querySelector('nav');
+toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'메뉴 닫기':'메뉴 열기')});
+document.querySelectorAll('.group>button').forEach(b=>{b.setAttribute('aria-expanded','false');b.addEventListener('click',()=>{const open=b.parentElement.classList.toggle('expanded');b.setAttribute('aria-expanded',String(open))})});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');document.querySelectorAll('.expanded').forEach(e=>e.classList.remove('expanded'));toggle.focus()}});
+document.querySelectorAll('a[href="#top"]').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false')}));
+const topButton=document.querySelector('.to-top');topButton.addEventListener('click',()=>window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));addEventListener('scroll',()=>{document.querySelector('header').classList.toggle('scrolled',scrollY>0);topButton.classList.toggle('show',scrollY>500)},{passive:true});
